@@ -2,7 +2,7 @@
 and at least 3 out of 4 special symbol groups */
 #include <iostream>
 #include <string>
-bool Verificate(const std::string& password) {
+bool verificate(const std::string& password) {
     if (password.size() < 8 || password.size() > 14) {
         return false;
     }
@@ -34,7 +34,7 @@ int main() {
     std::string password;
     std::cout << "Please enter your password:\n";
     std::getline(std::cin, password);
-    if (Verificate(password)) {
+    if (verificate(password)) {
         std::cout << "Password verified and accepted" << std::endl;
     }
     else {
