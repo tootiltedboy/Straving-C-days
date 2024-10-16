@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
     int max_value;
-    short int variable;
+    short int user_choise;
 
     cout << "Каким образом вы хотите инициализировать массив:" << endl;
     this_thread::sleep_for(250ms);
@@ -15,9 +15,9 @@ int main() {
     cout << "0 - автоматически" << endl;
     this_thread::sleep_for(250ms);
     cout << "Введите выбранную опцию: ";
-    cin >> variable;
+    cin >> user_choise;
 
-    switch(variable) {
+    switch(user_choise) {
     case 1 : {
         int N;
         cout << "Введите кол-во элементов массива: ";
