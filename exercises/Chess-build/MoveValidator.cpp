@@ -20,7 +20,6 @@ bool MoveValidator::isValidMove(Piece piece, int fromRow, int fromCol, int toRow
         case BLACK_ROOK:
             if (rowDiff == 0 || colDiff == 0) return true;
         break;
-
         case WHITE_KNIGHT:
         case BLACK_KNIGHT:
             if ((std::abs(rowDiff) == 2 && std::abs(colDiff) == 1) || (std::abs(rowDiff) == 1 && std::abs(colDiff) == 2)) return true;
@@ -45,6 +44,4 @@ bool MoveValidator::isValidMove(Piece piece, int fromRow, int fromCol, int toRow
             return false;
     }
     return false;
-}//
-// Created by tootiltedboy on 09.12.2024.
-//
+}

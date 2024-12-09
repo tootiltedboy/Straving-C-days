@@ -103,4 +103,30 @@ public:
         }
 
         if (CheckValidator::isKingInCheck(king, kingRow, kingCol, board)) {
-            cout << "Король находится под шахом! Ход отменен." << endl
+            cout << "Король находится под шахом! Ход отменен." << endl;
+            board[fromRow][fromCol] = piece;
+            board[toRow][toCol] = EMPTY;
+            return false;
+        }
+
+        return true;
+    }
+};
+
+int main() {
+    ChessBoard chessBoard;
+    string currentPlayer = "White";
+
+    while (true) {
+        chessBoard.printBoard();
+        cout << currentPlayer << "'s turn. Enter your move (e.g., KI E2 E4): ";
+        string move;
+        getline(cin, move);
+
+        if (chessBoard.movePiece(move)) {
+            currentPlayer = (currentPlayer == "White") ? "Black" : "White";
+        }
+    }
+
+    return 0;
+}
