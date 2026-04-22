@@ -1,18 +1,24 @@
 #include "CheckValidator.h"
 
-// Проверка, находится ли король в шахе
-bool CheckValidator::isKingInCheck(Piece king, int kingRow, int kingCol, const std::vector<std::vector<Piece>>& board) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            Piece attacker = board[i][j];
-            if (attacker != EMPTY && (attacker < BLACK_PAWN) == (king < BLACK_PAWN)) {
-                // Игнорируем союзные фигуры
-                continue;
-            }
-            if (MoveValidator::isValidMove(attacker, i, j, kingRow, kingCol, board)) {
-                return true;
-            }
-        }
+namespace {
+Color oppositeColor(Color color) {
+    return color == Color::White ? Color::Black : Color::White;
+}
+}
+
+bool CheckValidator::isKingInCheck(const GameState& state, Color color) {
+    const std::optional<Position> kingPosition = MoveValidator::findKing(state.board, color);
+    if (!kingPosition) {
+        return false;
     }
-    return false;
+
+    return MoveValidator::isSquareAttacked(state.board, *kingPosition, oppositeColor(color));
+}
+
+bool CheckValidator::isCheckmate(const GameState& state, Color color) {
+    return isKingInCheck(state, color) && MoveValidator::getAllLegalMoves(state, color).empty();
+}
+
+bool CheckValidator::isStalemate(const GameState& state, Color color) {
+    return !isKingInCheck(state, color) && MoveValidator::getAllLegalMoves(state, color).empty();
 }
